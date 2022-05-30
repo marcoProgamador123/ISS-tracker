@@ -22,16 +22,21 @@ export default class IssLocationScreen extends React.Component {
   //obtendo os dados da API
   getIssLocation = () => {
     axios
+      //se get conseguir obeter os dados da API
       .get("https://api.wheretheiss.at/v1/satellites/25544")
+      //então os dados são amarzenados para response
       .then(response => {
+        //setamos o state e location recebe response
         this.setState({ location: response.data })
       })
+      //se get não conseguir obter os dados, exibimos um alerta
       .catch(error => {
         Alert.alert(error.message)
       })
   }
 
   render() {
+    // verificamos se o objeto dentro de keys for 0, mostramos uma tela de carregamento
     if (Object.keys(this.state.location).length === 0) {
       return (
         <View style={styles.loading}>
@@ -40,6 +45,7 @@ export default class IssLocationScreen extends React.Component {
           </Text>
         </View>
       )
+      //se não for 0, fazemos isso 
     } else {
       return (
         <View style={styles.conteiner}>
@@ -121,15 +127,15 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 30,
     // borderTopRightRadius: 30,
     padding: 30,
-    borderRadius:30,
+    borderRadius: 30,
     // alignItems:"center",
-    justifyContent:"center"
+    justifyContent: "center"
   },
   infoText: {
     fontSize: 15,
     color: "black",
     fontWeight: "bold",
-    paddingTop:10
+    paddingTop: 10
   }
 
 })
